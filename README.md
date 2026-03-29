@@ -28,13 +28,15 @@ AI-powered PDF reader built with LangChain and Streamlit. Upload PDFs and chat w
 |-----------|------------|
 | Framework | [Streamlit](https://streamlit.io) |
 | LLM Orchestration | [LangChain](https://langchain.com) |
-| Embeddings | OpenAI / HuggingFace |
-| Vector Store | FAISS / Chroma |
+| LLM | [Groq](https://groq.com) (OpenAI-compatible) |
+| Embeddings | HuggingFace (thenlper/gte-small) |
+| Vector Store | ChromaDB |
+| PDF Processing | PyPDF2, PyPDFLoader |
 
 ## Prerequisites
 
 - Python 3.8+
-- OpenAI API key (or other LLM provider)
+- Groq API key
 
 ## Installation
 
@@ -72,9 +74,12 @@ Then open your browser to `http://localhost:8501` and:
 Create a `.env` file for local configuration:
 
 ```env
-OPENAI_API_KEY=your_key_here
-LLM_MODEL=gpt-4
-EMBEDDING_MODEL=text-embedding-3-small
+GROQ_API_KEY=your_key_here
+```
+
+Or set it as an environment variable:
+```bash
+export GROQ_API_KEY="your-api-key-here"
 ```
 
 ## Project Structure
@@ -82,12 +87,12 @@ EMBEDDING_MODEL=text-embedding-3-small
 ```
 chat-with-pdf/
 ├── app.py                 # Main Streamlit application
+├── htmlTemplates.py       # Chat UI templates (CSS, message templates)
 ├── requirements.txt       # Python dependencies
-├── src/
-│   ├── pdf_loader.py      # PDF text extraction
-│   ├── embeddings.py      # Vector embedding logic
-│   └── chat_engine.py     # RAG pipeline
-└── README.md
+├── .github/profile/       # GitHub profile README
+├── LICENSE               # GPL v3 License
+├── README.md             # This file
+└── img_1.png             # Demo screenshot
 ```
 
 ## Contributing
@@ -99,5 +104,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
 
-## DEMO
-![img_1.png](img_1.png)
+## PREVIEW
+
+Screenshot of the interactive PDF chat interface:
+
+![Chat with PDF Demo Screenshot](img_1.png)
