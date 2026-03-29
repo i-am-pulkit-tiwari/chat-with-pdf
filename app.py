@@ -9,10 +9,9 @@ from langchain_community.document_loaders import PyPDFLoader
 from PyPDF2 import PdfReader, PdfWriter
 from tempfile import NamedTemporaryFile
 from htmlTemplates import css, bot_template, user_template, expander_css
-# Task 1: Import the Libraries
 
 
-# Task 4: Process the Input PDF
+# Process the Input PDF
 def process_file(pdf):
     model_name = "thenlper/gte-small"
     model_kwargs = {'device': 'cpu'}
@@ -24,7 +23,7 @@ def process_file(pdf):
         return_source_documents=True)
     return chain
 
-# Task 6: Method for Handling User Input
+# Method for Handling User Input
 def handle_userinput(query):
     response = st.session_state.conversation(
         {"question": query,
@@ -43,7 +42,6 @@ def main():
     st.set_page_config(layout="wide",
                        page_title="Interactive Reader",
                        page_icon=":books:")
-
     st.write(css, unsafe_allow_html=True)
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -51,14 +49,13 @@ def main():
         st.session_state.chat_history = []
     if "N" not in st.session_state:
         st.session_state.N = 0
-
     st.session_state.col1, st.session_state.col2 = st.columns([1, 1])
     st.session_state.col1.header("Interactive Reader :books:")
     user_question = st.session_state.col1.text_input("Ask a question on the contents of the uploaded PDF:")
     st.session_state.expander1 = st.session_state.col1.expander('Your Chat', expanded=True)
     st.session_state.col1.markdown(expander_css, unsafe_allow_html=True)
 
-    # Task 5: Load and Process the PDF
+    # Load and Process the PDF
     st.session_state.col1.subheader("Your documents")
     st.session_state.pdf_doc = st.session_state.col1.file_uploader("Upload your PDF here and click on 'Process'")
     if st.session_state.col1.button("Process", key='a'):
@@ -72,7 +69,7 @@ def main():
                     st.session_state.conversation = process_file(pdf)
                     st.session_state.col1.markdown("Done processing. You may now ask a question.")
 
-    # Task 7: Handle Query and Display Pages
+    # Handle Query and Display Pages
     if user_question:
         handle_userinput(user_question)
         with NamedTemporaryFile(suffix="pdf") as temp:
@@ -93,6 +90,6 @@ def main():
                     pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}#page={3}"\\width = "100%" height = "900" type = "application/pdf frameborder="0"></iframe>'
                 st.session_state.col2.markdown(pdf_display, unsafe_allow_html=True)
 
+
 if __name__ == '__main__':
     main()
-
