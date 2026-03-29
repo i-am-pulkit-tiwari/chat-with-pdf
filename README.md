@@ -75,11 +75,13 @@ Create a `.env` file for local configuration:
 
 ```env
 GROQ_API_KEY=your_key_here
+HUGGINGFACEHUB_API_TOKEN=your_hf_token_here  # Optional, for private models
 ```
 
 Or set it as an environment variable:
 ```bash
 export GROQ_API_KEY="your-api-key-here"
+export HUGGINGFACEHUB_API_TOKEN="your-hf-token-here"  # Optional
 ```
 
 ## Project Structure

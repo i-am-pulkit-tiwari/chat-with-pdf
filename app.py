@@ -1,10 +1,10 @@
 import streamlit as st
 from dotenv import load_dotenv
 import base64
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_groq import ChatGroq
 from langchain_classic.chains import ConversationalRetrievalChain
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_community.document_loaders import PyPDFLoader
 from PyPDF2 import PdfReader, PdfWriter
 from tempfile import NamedTemporaryFile
